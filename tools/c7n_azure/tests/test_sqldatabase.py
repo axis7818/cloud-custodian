@@ -14,8 +14,9 @@
 
 import mock
 from azure_common import BaseTest, arm_template
-from c7n_azure.resources.sqldatabase import BackupRetentionPolicyFilter
+from c7n_azure.resources.sqldatabase import BackupRetentionPolicyFilter, ShortTermBackupRetentionPolicyAction
 from c7n_azure.query import ChildResourceQuery
+from c7n.filters.core import PolicyValidationError
 
 
 class SqlDatabaseTest(BaseTest):
@@ -275,3 +276,117 @@ class LongTermBackupRetentionPolicyFilterTest(BaseTest):
 
         resources = p.run()
         self.assertEqual(len(resources), 0)
+
+
+class ShortTermBackupRetentionPolicyActionTest(BaseTest):
+
+    def test_validate_short_term_backup_retention_policy_action_schema(self):
+        with self.sign_out_patch():
+            p = self.load_policy({
+                'name': 'short-term-action-schema-validate',
+                'resource': 'azure.sqldatabase',
+                'actions': [
+                    {
+                        'type': 'update-short-term-backup-retention-policy',
+                        'retention-period-days': 14
+                    }
+                ]
+            }, validate=True)
+            self.assertTrue(p)
+
+    def test_short_term_backup_retention_policy_action_schema_invalid_retention_period_days(self):
+        with self.assertRaises(PolicyValidationError) as context:
+            with self.sign_out_patch():
+                self.load_policy({
+                    'name': 'short-term-action-schema-validate',
+                    'resource': 'azure.sqldatabase',
+                    'actions': [
+                        {
+                            'type': 'update-short-term-backup-retention-policy',
+                            'retention-period-days': 9
+                        }
+                    ]
+                }, validate=True)
+        error_string = str(context.exception)
+
+        self.assertIn("Invalid retention-period-days", error_string)
+        self.assertIn("9", error_string)
+        self.assertIn(
+            str(ShortTermBackupRetentionPolicyAction.VALID_RETENTION_PERIOD_DAYS), error_string)
+
+    def test_set_short_term_retention_to_28_days(self):
+        p = self.load_policy({
+            'name': 'test-set-short-term-retention-to-28-days',
+            'resource': 'azure.sqldatabase',
+            'actions': [
+                {
+                    'type': 'update-short-term-backup-retention-policy',
+                    'retention-period-days': 28
+                }
+            ]
+        })
+        self.assertTrue(False, "not implemented")
+
+
+class LongTermBackupRetentionPolicyActionTest(BaseTest):
+
+    def test_validate_long_term_backup_retention_policy_action_schema_validate(self):
+        with self.sign_out_patch():
+            p = self.load_policy({
+                'name': 'long-term-action-schema-validate',
+                'resource': 'azure.sqldatabase',
+                'actions': [
+                    {
+                        'type': 'update-long-term-backup-retention-policy',
+                        'backup-type': 'yearly',
+                        'retention-period': 18,
+                        'retention-period-units': 'months'
+                    }
+                ]
+            }, validate=True)
+            self.assertTrue(p)
+
+    def test_set_weekly_backup_retention_to_10_days(self):
+        p = self.load_policy({
+            'name': 'test-set-weekly-backup-retention-to-10-days',
+            'resource': 'azure.sqldatabase',
+            'actions': [
+                {
+                    'type': 'update-long-term-backup-retention-policy',
+                    'backup-type': 'weekly',
+                    'retention-period': 10,
+                    'retention-period-units': 'days'
+                }
+            ]
+        })
+        self.assertTrue(False, "not implemented")
+
+    def test_set_monthly_backup_retention_to_6_weeks(self):
+        p = self.load_policy({
+            'name': 'test-set-monthly-backup-retention-to-6-weeks',
+            'resource': 'azure.sqldatabase',
+            'actions': [
+                {
+                    'type': 'update-long-term-backup-retention-policy',
+                    'backup-type': 'weekly',
+                    'retention-period': 10,
+                    'retention-period-units': 'days'
+                }
+            ]
+        })
+        self.assertTrue(False, "not implemented")
+
+    def test_set_yearly_backup_retention_to_18_months(self):
+        p = self.load_policy({
+            'name': 'test-set-yearly-backup-retention-to-18-months',
+            'resource': 'azure.sqldatabase',
+            'actions': [
+                {
+                    'type': 'update-long-term-backup-retention-policy',
+                    'backup-type': 'weekly',
+                    'retention-period': 10,
+                    'retention-period-units': 'days'
+                }
+            ]
+        })
+        self.assertTrue(False, "not implemented")
