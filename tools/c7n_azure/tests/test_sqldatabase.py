@@ -14,7 +14,8 @@
 
 import mock
 from azure_common import BaseTest, arm_template
-from c7n_azure.resources.sqldatabase import BackupRetentionPolicyFilter, ShortTermBackupRetentionPolicyAction
+from c7n_azure.resources.sqldatabase import BackupRetentionPolicyFilter, \
+    ShortTermBackupRetentionPolicyAction
 from c7n_azure.query import ChildResourceQuery
 from c7n.filters.core import PolicyValidationError
 

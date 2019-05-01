@@ -68,6 +68,24 @@ class BackupRetentionPolicyHelper(object):
             raise ValueError("Unable to determine the sqlserver name for sqldatabase")
         return resource_group_name, server_name, database_name
 
+    @staticmethod
+    def get_backup_retention_policy(i, get_operation):
+        resource_group_name, server_name, database_name = \
+            BackupRetentionPolicyHelper.get_backup_retention_policy_context(i)
+
+        try:
+            response = get_operation(resource_group_name, server_name, database_name)
+        except CloudError as e:
+            if e.status_code == 404:
+                response = None
+            else:
+                log.error("Unable to get backup retention policy. "
+                "(resourceGroup: {}, sqlserver: {}, sqldatabase: {})".format(
+                    resource_group_name, server_name, database_name))
+                raise e
+
+        return response
+
 
 class BackupRetentionPolicyFilter(Filter):
 
@@ -110,28 +128,12 @@ class BackupRetentionPolicyFilter(Filter):
         return matched_resources
 
     def _process_resource(self, i, get_operation):
-        retention_policy = self._get_backup_retention_policy(i, get_operation)
+        retention_policy = BackupRetentionPolicyHelper.get_backup_retention_policy(i, get_operation)
+        i['c7n:{}'.format(self.operations_property)] = retention_policy.as_dict()
         if retention_policy is None:
             return self._perform_op(0, self.retention_limit)
         retention = self.get_retention_from_policy(retention_policy)
         return retention is not None and self._perform_op(retention, self.retention_limit)
-
-    def _get_backup_retention_policy(self, i, get_operation):
-        resource_group_name, server_name, database_name = \
-            BackupRetentionPolicyHelper.get_backup_retention_policy_context(i)
-
-        try:
-            response = get_operation(resource_group_name, server_name, database_name)
-        except CloudError as e:
-            if e.status_code == 404:
-                response = None
-            else:
-                log.error("Unable to get backup retention policy. "
-                "(resourceGroup: {}, sqlserver: {}, sqldatabase: {})".format(
-                    resource_group_name, server_name, database_name))
-                raise e
-
-        return response
 
     def _perform_op(self, a, b):
         op = scalar_ops.get(self.data.get('op', 'eq'))
@@ -251,17 +253,21 @@ class LongTermBackupRetentionPolicyFilter(BackupRetentionPolicyFilter):
 
 class BackupRetentionPolicyAction(AzureBaseAction):
 
-    def _process_resource(self, resource, operations_property):
+    def __init__(self, operations_property, *args, **kwargs):
+        super(BackupRetentionPolicyAction, self).__init__(*args, **kwargs)
+        self.operations_property = operations_property
+
+    def _process_resource(self, resource):
         client = self.manager.get_client()
-        update_operation = getattr(client, operations_property).create_or_update
+        update_operation = getattr(client, self.operations_property).create_or_update
 
         resource_group_name, server_name, database_name = \
             BackupRetentionPolicyHelper.get_backup_retention_policy_context(resource)
-        parameters = self.get_parameters_for_new_retention_policy()
+        parameters = self.get_parameters_for_new_retention_policy(resource)
 
         update_operation(resource_group_name, server_name, database_name, parameters)
 
-    def get_parameters_for_new_retention_policy(self):
+    def get_parameters_for_new_retention_policy(self, resource):
         raise NotImplementedError()
 
 
@@ -274,15 +280,12 @@ class ShortTermBackupRetentionPolicyAction(BackupRetentionPolicyAction):
                          rinherit=ShortTermBackupRetentionPolicyFilter.schema,
                          op=None)
 
-    def __init__(self, data=None, manager=None, log_dir=None):
-        super(ShortTermBackupRetentionPolicyAction, self).__init__(data, manager, log_dir)
+    def __init__(self, *args, **kwargs):
+        super(ShortTermBackupRetentionPolicyAction, self).__init__(
+            BackupRetentionPolicyHelper.SHORT_TERM_SQL_OPERATIONS, *args, **kwargs)
         self.retention_period_days = self.data['retention-period-days']
 
-    def _process_resource(self, resource):
-        super(ShortTermBackupRetentionPolicyAction, self)._process_resource(
-            resource, BackupRetentionPolicyHelper.SHORT_TERM_SQL_OPERATIONS)
-
-    def get_parameters_for_new_retention_policy(self):
+    def get_parameters_for_new_retention_policy(self, resource):
         return self.retention_period_days
 
     def validate(self):
@@ -304,29 +307,48 @@ class LongTermBackupRetentionPolicyAction(BackupRetentionPolicyAction):
                          rinherit=LongTermBackupRetentionPolicyFilter.schema,
                          op=None)
 
-    def _process_resource(self, resource):
-        super(LongTermBackupRetentionPolicyAction, self)._process_resource(
-            resource, BackupRetentionPolicyHelper.LONG_TERM_SQL_OPERATIONS)
+    def __init__(self, *args, **kwargs):
+        super(LongTermBackupRetentionPolicyAction, self).__init__(
+            BackupRetentionPolicyHelper.LONG_TERM_SQL_OPERATIONS, *args, **kwargs)
 
-    def get_parameters_for_new_retention_policy(self):
         retention_period = self.data['retention-period']
         retention_period_units = RetentionPeriod.Units[self.data['retention-period-units']]
-        iso8601_duration = RetentionPeriod.iso8601_duration_from_period_and_units(
+        self.iso8601_duration = RetentionPeriod.iso8601_duration_from_period_and_units(
             retention_period, retention_period_units)
+        self.backup_type = self.data['backup-type']
 
-        backup_type = self.data['backup-type']
-        weekly_retention = iso8601_duration if \
-            backup_type == BackupRetentionPolicyHelper.LongTermBackupType.weekly.value else None
-        monthly_retention = iso8601_duration if \
-            backup_type == BackupRetentionPolicyHelper.LongTermBackupType.monthly.value else None
-        yearly_retention = iso8601_duration if \
-            backup_type == BackupRetentionPolicyHelper.LongTermBackupType.monthly.yearly else None
+    def get_parameters_for_new_retention_policy(self, resource):
+        current_retention_policy = self._get_current_retention_policy(resource)
 
-        # TODO: when only one value is specified, the ones that aren't are cleared.
-        # we should either require that all are specified, or lookup the existing
-        # values and set the unspecified ones to their current values.
-        return {
+        weekly_retention = current_retention_policy['weekly_retention']
+        monthly_retention = current_retention_policy['monthly_retention']
+        yearly_retention = current_retention_policy['yearly_retention']
+
+        if self.backup_type == BackupRetentionPolicyHelper.LongTermBackupType.weekly.value:
+            weekly_retention = self.iso8601_duration
+        elif self.backup_type == BackupRetentionPolicyHelper.LongTermBackupType.monthly.value:
+            monthly_retention = self.iso8601_duration
+        elif self.backup_type == BackupRetentionPolicyHelper.LongTermBackupType.yearly.value:
+            yearly_retention = self.iso8601_duration
+
+        parameters = {
             'weekly_retention': weekly_retention,
             'monthly_retention': monthly_retention,
-            'yearly_retention': yearly_retention
+            'yearly_retention': yearly_retention,
+            'week_of_year': current_retention_policy['week_of_year']
         }
+        return parameters
+
+    def _get_current_retention_policy(self, resource):
+        current_retention_policy = self.data.get('c7n:{}'.format(
+            BackupRetentionPolicyHelper.LONG_TERM_SQL_OPERATIONS))
+
+        if current_retention_policy is None:
+            client = self.manager.get_client()
+            get_operation = getattr(
+                client, BackupRetentionPolicyHelper.LONG_TERM_SQL_OPERATIONS).get
+            retention_policy = BackupRetentionPolicyHelper.get_backup_retention_policy(
+                resource, get_operation)
+            current_retention_policy = retention_policy.as_dict()
+
+        return current_retention_policy
