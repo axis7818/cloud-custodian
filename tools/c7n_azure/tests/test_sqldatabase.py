@@ -13,11 +13,14 @@
 # limitations under the License.
 
 import mock
+import datetime
 from azure_common import BaseTest, arm_template
 from c7n_azure.resources.sqldatabase import BackupRetentionPolicyFilter, \
     ShortTermBackupRetentionPolicyAction
 from c7n_azure.query import ChildResourceQuery
 from c7n.filters.core import PolicyValidationError
+from c7n.utils import local_session
+from c7n_azure.session import Session
 
 
 class SqlDatabaseTest(BaseTest):
@@ -279,7 +282,7 @@ class LongTermBackupRetentionPolicyFilterTest(BaseTest):
         self.assertEqual(len(resources), 0)
 
 
-class ShortTermBackupRetentionPolicyActionTest(BaseTest):
+class ShortTermBackupRetentionPolicyActionSchemaTest(BaseTest):
 
     def test_validate_short_term_backup_retention_policy_action_schema(self):
         with self.sign_out_patch():
@@ -315,10 +318,43 @@ class ShortTermBackupRetentionPolicyActionTest(BaseTest):
         self.assertIn(
             str(ShortTermBackupRetentionPolicyAction.VALID_RETENTION_PERIOD_DAYS), error_string)
 
+
+class ShortTermBackupRetentionPolicyActionTest(BaseTest):
+
+    @classmethod
+    def setUpClass(cls, *args, **kwargs):
+        super(ShortTermBackupRetentionPolicyActionTest, cls).setUpClass(*args, **kwargs)
+        cls.client = local_session(Session).client('azure.mgmt.sql.SqlManagementClient') \
+            .backup_short_term_retention_policies
+        cls.backup_retention_policy_context = [
+            "test_sqlserver", "cctestsqlserverkonu36uvuesr4", "cctestdb"]
+
+    def tearDown(self, *args, **kwargs):
+        super(ShortTermBackupRetentionPolicyActionTest, self).tearDown(*args, **kwargs)
+        start = datetime.datetime.now()
+        poller = ShortTermBackupRetentionPolicyActionTest.client.update(
+            *ShortTermBackupRetentionPolicyActionTest.backup_retention_policy_context, 14)
+        result = poller.result(timeout=100)
+        status = poller.status()
+        end = datetime.datetime.now()
+        delta_seconds = (end - start).total_seconds()
+
+        self.assertEqual(status, 'Success')
+        self.assertEqual(result.retention_period_days, 14)
+
+    @arm_template('sqlserver.json')
     def test_set_short_term_retention_to_28_days(self):
         p = self.load_policy({
             'name': 'test-set-short-term-retention-to-28-days',
             'resource': 'azure.sqldatabase',
+            'filters': [
+                {
+                    'type': 'value',
+                    'key': 'name',
+                    'op': 'eq',
+                    'value': 'cctestdb'
+                }
+            ],
             'actions': [
                 {
                     'type': 'update-short-term-backup-retention-policy',
@@ -326,7 +362,14 @@ class ShortTermBackupRetentionPolicyActionTest(BaseTest):
                 }
             ]
         })
-        self.assertTrue(False, "not implemented")
+        resources = p.run()
+        self.assertEqual(len(resources), 1)
+        self._assert_retention_period_equal(28)
+
+    def _assert_retention_period_equal(self, days, msg=None):
+        current_retention_period = ShortTermBackupRetentionPolicyActionTest.client.get(
+            *ShortTermBackupRetentionPolicyActionTest.backup_retention_policy_context)
+        self.assertEqual(current_retention_period.retention_days, days, msg)
 
 
 class LongTermBackupRetentionPolicyActionTest(BaseTest):
