@@ -1,0 +1,56 @@
+interactions:
+- request:
+    body: mock_body
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '96'
+      Content-Type:
+      - application/json; charset=utf-8
+      User-Agent:
+      - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
+        azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
+      accept-language:
+      - en-US
+    method: PUT
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
+  response:
+    body:
+      string: '{"error":{"code":"InvalidParameterValue","message":"Invalid value given
+        for parameter properties. Specify a valid parameter value."}}'
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Length:
+      - '133'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2019 17:29:47 GMT
+      Expires:
+      - '-1'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-HTTPAPI/2.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      x-ms-correlation-request-id:
+      - 7915e063-c939-4c8f-b1bf-95c10a97fc49
+      x-ms-ratelimit-remaining-subscription-writes:
+      - '1198'
+      x-ms-request-id:
+      - 250fa9ed-ce1a-43e4-8926-d233b06b58ce
+      x-ms-routing-request-id:
+      - WESTUS2:20190506T172947Z:7915e063-c939-4c8f-b1bf-95c10a97fc49
+    status:
+      code: 400
+      message: Bad Request
+version: 1

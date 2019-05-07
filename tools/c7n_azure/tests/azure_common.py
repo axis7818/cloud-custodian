@@ -116,11 +116,11 @@ class BaseTest(TestUtils, AzureVCRBaseTest):
 
         # Patch Poller with constructor that always disables polling
         self.lro_patch = patch.object(msrest.polling.LROPoller, '__init__', BaseTest.lro_test_init)
-        self.lro_patch.start()
+        # self.lro_patch.start()  # TODO: re-enable before checkin
 
     def tearDown(self):
         super(BaseTest, self).tearDown()
-        self.lro_patch.stop()
+        # self.lro_patch.stop()  # TODO: re-enable before checkin
 
     @staticmethod
     def setup_account():

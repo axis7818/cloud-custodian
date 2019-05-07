@@ -265,12 +265,8 @@ class BackupRetentionPolicyAction(AzureBaseAction):
             BackupRetentionPolicyHelper.get_backup_retention_policy_context(resource)
         parameters = self.get_parameters_for_new_retention_policy(resource)
 
-        # TBD: how do we want to handle this polling (if at all)?
         poller = update_operation(resource_group_name, server_name, database_name, parameters)
-        _ = poller.result(timeout=100)
-        status = poller.status()
-        if status != 'Success':
-            raise Exception("Failed to update backup retention policy")
+        poller.result()
 
     def get_parameters_for_new_retention_policy(self, resource):
         raise NotImplementedError()

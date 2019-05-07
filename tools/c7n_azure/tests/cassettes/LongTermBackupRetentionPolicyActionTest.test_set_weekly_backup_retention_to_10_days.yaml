@@ -34,7 +34,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:14 GMT
+      - Mon, 06 May 2019 17:29:06 GMT
       Expires:
       - '-1'
       Pragma:
@@ -50,13 +50,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - 70b70153-ef4a-4f90-8cc3-79cab31aef19
+      - 827ebe54-43ec-4a14-9d4a-17b7e712f43e
       x-ms-ratelimit-remaining-subscription-reads:
-      - '11984'
+      - '11986'
       x-ms-request-id:
-      - 3e8319a7-616a-40e7-8dec-50d769580363
+      - 2013cdee-fe42-4f25-9ef7-8d403b168a86
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172814Z:70b70153-ef4a-4f90-8cc3-79cab31aef19
+      - WESTUS2:20190506T172906Z:827ebe54-43ec-4a14-9d4a-17b7e712f43e
     status:
       code: 200
       message: OK
@@ -105,7 +105,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:14 GMT
+      - Mon, 06 May 2019 17:29:06 GMT
       Expires:
       - '-1'
       Pragma:
@@ -121,13 +121,73 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - 8633cff1-8c31-4ca7-9695-e7f4e4513675
+      - f2d04043-38c9-4057-9f7b-1d8e8b7a5d9d
       x-ms-ratelimit-remaining-subscription-reads:
-      - '11985'
+      - '11981'
       x-ms-request-id:
-      - 7879741b-d1be-4854-bf06-5e733ed40bcd
+      - be5503b8-4381-4bfb-9330-deb570f7cc9f
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172815Z:8633cff1-8c31-4ca7-9695-e7f4e4513675
+      - WESTUS2:20190506T172907Z:f2d04043-38c9-4057-9f7b-1d8e8b7a5d9d
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
+        azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
+      accept-language:
+      - en-US
+    method: GET
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
+        VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR6u6
+        WuV1W+TNR49+8UdXef62vH6Vt/myLarlR48+erm7//Sj0UeLatnOO998+l364jrP6s7ne78PfQ5I
+        X57/PvTtR4/2dn7J6KNiRt/dbdaTZloXK7Rt7s4OHjw8P9+fbB9MZg+39+8fHGw/nEx2tu/v5nsH
+        D+/ne/v3P71b5021rqf553W1XjV327xpf//mF5VNXl/m9V3C/7KY5XVz94tiWldNdd6OX/+i8q58
+        3dydTvGCbf+2Wq7vfbq+XOdNvX93lrXZJGty02w2uTvJpm/Xq+fV8uJNXi/suF5WZTElIt2d5efZ
+        umxphMtskdOQ3Aft9QofxPFwXd3Qw0e/5P8BINACk5UBAAA=
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2019 17:29:07 GMT
+      Expires:
+      - '-1'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-HTTPAPI/2.0
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      x-ms-correlation-request-id:
+      - 985090da-b246-48b4-963b-8f6d05e03129
+      x-ms-ratelimit-remaining-subscription-reads:
+      - '11986'
+      x-ms-request-id:
+      - 4cc1489a-7d56-4604-87b4-d5aa2b47209d
+      x-ms-routing-request-id:
+      - WESTUS2:20190506T172908Z:985090da-b246-48b4-963b-8f6d05e03129
     status:
       code: 200
       message: OK
@@ -141,7 +201,7 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '37'
+      - '114'
       Content-Type:
       - application/json; charset=utf-8
       User-Agent:
@@ -150,25 +210,25 @@ interactions:
       accept-language:
       - en-US
     method: PUT
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
   response:
     body:
-      string: '{"operation":"UpdateLogicalDatabase","startTime":"2019-05-06T17:28:15.31Z"}'
+      string: '{"operation":"UpsertDatabaseBackupArchivalPolicyV2","startTime":"2019-05-06T17:29:08.29Z"}'
     headers:
       Azure-AsyncOperation:
-      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyAzureAsyncOperation/ee8e1282-0c64-4dce-a158-6d1c02a18e5c?api-version=2017-10-01-preview
+      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/longTermRetentionPolicyAzureAsyncOperation/0271ef77-7284-4ce4-80d8-2fbb6a6840c3?api-version=2017-03-01-preview
       Cache-Control:
       - no-cache
       Content-Length:
-      - '75'
+      - '90'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:15 GMT
+      - Mon, 06 May 2019 17:29:11 GMT
       Expires:
       - '-1'
       Location:
-      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyOperationResults/ee8e1282-0c64-4dce-a158-6d1c02a18e5c?api-version=2017-10-01-preview
+      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/longTermRetentionPolicyOperationResults/0271ef77-7284-4ce4-80d8-2fbb6a6840c3?api-version=2017-03-01-preview
       Pragma:
       - no-cache
       Retry-After:
@@ -180,13 +240,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - 5f2626bc-d8be-4c89-8ed2-20c01b2b22bb
+      - d39243f0-1602-4138-8fd0-a40d1e04e2bc
       x-ms-ratelimit-remaining-subscription-writes:
-      - '1199'
+      - '1198'
       x-ms-request-id:
-      - 2c94ef5a-f0fb-433c-b719-a7e7d6b97e69
+      - 0271ef77-7284-4ce4-80d8-2fbb6a6840c3
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172815Z:5f2626bc-d8be-4c89-8ed2-20c01b2b22bb
+      - WESTUS2:20190506T172911Z:d39243f0-1602-4138-8fd0-a40d1e04e2bc
     status:
       code: 202
       message: Accepted
@@ -203,14 +263,14 @@ interactions:
       - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
         azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
     method: GET
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyAzureAsyncOperation/ea42f556-5106-4743-99b0-c129bfa71a47?api-version=2017-10-01-preview
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/longTermRetentionPolicyAzureAsyncOperation/ea42f556-5106-4743-99b0-c129bfa71a47?api-version=2017-03-01-preview
   response:
     body:
       string: !!binary |
         H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
         VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR8ts
-        kX/06KM8P8h39w72tnemn+5v78+m+Xa2e/9g+9PZ7nRnL9s9yO9PPxp91LRZu26o/ev1dJrns3wm
-        H9btm4Lh7O3sPtzeub+98+mb3QeP9g4e7d4f39v9qY9+yf8DOMQZl2oAAAA=
+        kX/06KOdvQe7+fmDB9sP9g72t/en+f72wc7sYHvvfDL5NPv0YH9neu+j0UdNm7Xrhtq/Xk+neT7L
+        Z/Jh3b4pGM7ezu7D7Z372zufvtl98Gjv4aOdg/Hew5/66Jf8P5uXWShqAAAA
     headers:
       Cache-Control:
       - no-cache
@@ -219,7 +279,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:30 GMT
+      - Mon, 06 May 2019 17:29:22 GMT
       Expires:
       - '-1'
       Pragma:
@@ -237,13 +297,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - 47a865f8-85f0-4a71-824b-8841506d0d7c
+      - e3e3be24-ec79-4635-b59a-69cdc545c59d
       x-ms-ratelimit-remaining-subscription-reads:
       - '11993'
       x-ms-request-id:
-      - 07ecf827-9af3-4b73-8fd1-9daedafcdd8f
+      - dc3ea8b8-3474-4de8-aabd-47bc7cd57810
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172830Z:47a865f8-85f0-4a71-824b-8841506d0d7c
+      - WESTUS2:20190506T172923Z:e3e3be24-ec79-4635-b59a-69cdc545c59d
     status:
       code: 200
       message: OK
@@ -260,16 +320,17 @@ interactions:
       - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
         azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
     method: GET
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
   response:
     body:
       string: !!binary |
         H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
         VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR6u6
-        WuV1W+TNR49+8Ud13ubLtqiWT7Nr+mDv4JeMPipmHz366G6znjTTuljhy+bu7ODBw/Pz/cn2wWT2
-        cHv//sHB9sPJZGf7/m6+d/Dwfr63f//Tu3XeVOt6mn9eV+tVc7fNm/b3b35R2eT1ZV7fpY4vi1le
-        N3e/KKZ11VTn7fj1LyrvytfN3ekUL9j2b6vl+t6n68t13tT7d2dZm02yJjfNZpO7k2z6dr16Pa/q
-        9k1eL16ZkbysymJKw7s7y8+zddl+NPpomS1yGpP7oL1e4YM4Iq6vm7r46Jf8P8Cz6WFQAQAA
+        WuV1W+TNR49+8UdXef62vH6Vt/myLarlR48+erm78/Sj0UeLatnOO998+l364jrP6s7ne78PfQ5I
+        X57/PvTtR4/2dn7J6KNiRt/dbdaTZloXK7Rt7s4OHjw8P9+fbB9MZg+39+8fHGw/nEx2tu/v5nsH
+        D+/ne/v3P71b5021rqf553W1XjV327xpf//mF5VNXl/m9V3C/7KY5XVz94tiWldNdd6OX/+i8q58
+        3dydTvGCbf+2Wq7vfbq+XOdNvX93lrXZJGty02w2uTvJpm/Xq+fV8uJNXi/suF5WZTElIt2d5efZ
+        umxphMtskdOQ3Aft9QofxPFwXd3Qw0e/5P8BdmCbcZUBAAA=
     headers:
       Cache-Control:
       - no-cache
@@ -278,7 +339,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:30 GMT
+      - Mon, 06 May 2019 17:29:22 GMT
       Expires:
       - '-1'
       Pragma:
@@ -294,13 +355,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - fe1e5914-6cb3-4c02-875d-dd666c223fa6
+      - 390f10a1-3292-4fdb-8218-d36ce34db1ce
       x-ms-ratelimit-remaining-subscription-reads:
-      - '11995'
+      - '11992'
       x-ms-request-id:
-      - fe5c95f5-de74-4ab1-87df-0c2cae4b94ba
+      - 2c84503c-f0d6-4689-b023-da321b26a753
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172831Z:fe1e5914-6cb3-4c02-875d-dd666c223fa6
+      - WESTUS2:20190506T172923Z:390f10a1-3292-4fdb-8218-d36ce34db1ce
     status:
       code: 200
       message: OK
@@ -319,16 +380,17 @@ interactions:
       accept-language:
       - en-US
     method: GET
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
   response:
     body:
       string: !!binary |
         H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
         VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR6u6
-        WuV1W+TNR49+8Ud13ubLtqiWT7Nr+mDv4JeMPipmHz366G6znjTTuljhy+bu7ODBw/Pz/cn2wWT2
-        cHv//sHB9sPJZGf7/m6+d/Dwfr63f//Tu3XeVOt6mn9eV+tVc7fNm/b3b35R2eT1ZV7fpY4vi1le
-        N3e/KKZ11VTn7fj1LyrvytfN3ekUL9j2b6vl+t6n68t13tT7d2dZm02yJjfNZpO7k2z6dr16Pa/q
-        9k1eL16ZkbysymJKw7s7y8+zddl+NPpomS1yGpP7oL1e4YM4Iq6vm7r46Jf8P8Cz6WFQAQAA
+        WuV1W+TNR49+8UdXef62vH6Vt/myLarlR48+erm78/Sj0UeLatnOO998+l364jrP6s7ne78PfQ5I
+        X57/PvTtR4/2dn7J6KNiRt/dbdaTZloXK7Rt7s4OHjw8P9+fbB9MZg+39+8fHGw/nEx2tu/v5nsH
+        D+/ne/v3P71b5021rqf553W1XjV327xpf//mF5VNXl/m9V3C/7KY5XVz94tiWldNdd6OX/+i8q58
+        3dydTvGCbf+2Wq7vfbq+XOdNvX93lrXZJGty02w2uTvJpm/Xq+fV8uJNXi/suF5WZTElIt2d5efZ
+        umxphMtskdOQ3Aft9QofxPFwXd3Qw0e/5P8BdmCbcZUBAAA=
     headers:
       Cache-Control:
       - no-cache
@@ -337,7 +399,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:31 GMT
+      - Mon, 06 May 2019 17:29:24 GMT
       Expires:
       - '-1'
       Pragma:
@@ -353,13 +415,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - 1696f370-828c-4dc7-8f80-a1690ae7cfd5
+      - 430f9481-4006-4d17-9963-b4b1b0487468
       x-ms-ratelimit-remaining-subscription-reads:
-      - '11990'
+      - '11979'
       x-ms-request-id:
-      - 49930b17-a9aa-4de4-a0f2-271b588b666d
+      - 2b0d2cb7-76ab-47ac-bdfe-206560d24ed0
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172831Z:1696f370-828c-4dc7-8f80-a1690ae7cfd5
+      - WESTUS2:20190506T172924Z:430f9481-4006-4d17-9963-b4b1b0487468
     status:
       code: 200
       message: OK
@@ -373,7 +435,7 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '37'
+      - '96'
       Content-Type:
       - application/json; charset=utf-8
       User-Agent:
@@ -381,30 +443,25 @@ interactions:
         azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
       accept-language:
       - en-US
-    method: PATCH
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
+    method: PUT
+    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupLongTermRetentionPolicies/default?api-version=2017-03-01-preview
   response:
     body:
-      string: '{"operation":"UpdateLogicalDatabase","startTime":"2019-05-06T17:28:31.683Z"}'
+      string: '{"error":{"code":"InvalidParameterValue","message":"Invalid value given
+        for parameter properties. Specify a valid parameter value."}}'
     headers:
-      Azure-AsyncOperation:
-      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyAzureAsyncOperation/83e6b992-60fc-48d0-a756-cb1aeee93a06?api-version=2017-10-01-preview
       Cache-Control:
       - no-cache
       Content-Length:
-      - '76'
+      - '133'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2019 17:28:31 GMT
+      - Mon, 06 May 2019 17:29:24 GMT
       Expires:
       - '-1'
-      Location:
-      - https://management.azure.com/subscriptions/d879ff4b-8bd9-4588-9bb0-51e2895e2456/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyOperationResults/83e6b992-60fc-48d0-a756-cb1aeee93a06?api-version=2017-10-01-preview
       Pragma:
       - no-cache
-      Retry-After:
-      - '15'
       Server:
       - Microsoft-HTTPAPI/2.0
       Strict-Transport-Security:
@@ -412,128 +469,14 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       x-ms-correlation-request-id:
-      - d346f21d-ac65-4e61-815d-508e89a11d0e
+      - 5d9d884b-8e5c-433c-9888-d02b8df56238
       x-ms-ratelimit-remaining-subscription-writes:
-      - '1198'
+      - '1199'
       x-ms-request-id:
-      - 6cf8804b-0a66-4bdf-b8ae-ebed6e46933d
+      - b3a6a5de-04f1-452b-8646-09dbac2db3cd
       x-ms-routing-request-id:
-      - WESTUS2:20190506T172831Z:d346f21d-ac65-4e61-815d-508e89a11d0e
+      - WESTUS2:20190506T172925Z:5d9d884b-8e5c-433c-9888-d02b8df56238
     status:
-      code: 202
-      message: Accepted
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
-        azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
-    method: GET
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/locations/eastus2/shortTermRetentionPolicyAzureAsyncOperation/ea42f556-5106-4743-99b0-c129bfa71a47?api-version=2017-10-01-preview
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
-        VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR8ts
-        kX/06KODe/mnk4cP97Y/3Tmfbu8fzHa2swf3P92eTnazPM8f3st2Pv1o9FHTZu26ofav19Npns/y
-        mXxYt28KhrO3s/twe+f+9s6nb3YfPNo7eHRvd/zpwb2f+uiX/D+gXDaDawAAAA==
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Mon, 06 May 2019 17:28:46 GMT
-      Expires:
-      - '-1'
-      Pragma:
-      - no-cache
-      Retry-After:
-      - '15'
-      Server:
-      - Microsoft-HTTPAPI/2.0
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Content-Type-Options:
-      - nosniff
-      x-ms-correlation-request-id:
-      - 25806d2a-534c-4c4a-ace0-f82ff13a5a67
-      x-ms-ratelimit-remaining-subscription-reads:
-      - '11991'
-      x-ms-request-id:
-      - bca8ab0f-972e-4ada-871b-9bd64a9c5ca7
-      x-ms-routing-request-id:
-      - WESTUS2:20190506T172846Z:25806d2a-534c-4c4a-ace0-f82ff13a5a67
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - python/3.7.3 (Darwin-18.5.0-x86_64-i386-64bit) msrest/0.6.6 msrest_azure/0.6.0
-        azure-mgmt-sql/0.12.0 Azure-SDK-For-Python
-    method: GET
-    uri: https://management.azure.com/subscriptions/ea42f556-5106-4743-99b0-c129bfa71a47/resourceGroups/test_sqlserver/providers/Microsoft.Sql/servers/cctestsqlserverkonu36uvuesr4/databases/cctestdb/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3mkuwdaUcjKasqgcpl
-        VmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZkAWz2zkrayZ4hgKrIHz9+fB8/In7xR6u6
-        WuV1W+TNR49+8Ud13ubLtqiWT7Nr+mB3/5eMPipmHz366G6znjTTuljhy+bu7ODBw/Pz/cn2wWT2
-        cHv//sHB9sPJZGf7/m6+d/Dwfr63f//Tu3XeVOt6mn9eV+tVc7fNm/b3b35R2eT1ZV7fpY4vi1le
-        N3e/KKZ11VTn7fj1LyrvytfN3ekUL9j2b6vl+t6n68t13tT7d2dZm02yJjfNZpO7k2z6dr16Pa/q
-        9k1eL16ZkbysymJKw7s7y8+zddl+NPpomS1yGpP7oL1e4YM4Iq6vm7r46Jf8P421PJRQAQAA
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Mon, 06 May 2019 17:28:46 GMT
-      Expires:
-      - '-1'
-      Pragma:
-      - no-cache
-      Server:
-      - Microsoft-HTTPAPI/2.0
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      X-Content-Type-Options:
-      - nosniff
-      x-ms-correlation-request-id:
-      - c6ffa0e7-0a31-4455-af3a-63f0ea43bba5
-      x-ms-ratelimit-remaining-subscription-reads:
-      - '11994'
-      x-ms-request-id:
-      - 1e5c965a-12aa-4846-ab07-8c80773f2ac2
-      x-ms-routing-request-id:
-      - WESTUS2:20190506T172846Z:c6ffa0e7-0a31-4455-af3a-63f0ea43bba5
-    status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
 version: 1
